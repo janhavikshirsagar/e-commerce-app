@@ -15,7 +15,7 @@ def get_db():
         db.close()
 
 @router.post("/")
-def create_product(product: ProductCreate, db: Session = Depends(get_db), user=Depends(verify_token)):
+def create_product(product: ProductCreate, db: Session = Depends(get_db)):
     p = Product(name=product.name, price=product.price)
     db.add(p)
     db.commit()
