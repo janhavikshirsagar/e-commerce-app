@@ -26,10 +26,23 @@ const Products = () => {
 }, []);
 
   const addToCart = (product) => {
-  const updatedCart = [...cart, product];
+  const updatedCart = [...cart];
+
+  const existing = updatedCart.find((item) => item.id === product.id);
+
+  if (existing) {
+    updatedCart = updatedCart.map((item) =>
+      item.id === product.id
+        ? { ...item, quantity: (item.quantity || 1) + 1 }
+        : item
+    );
+  } else {
+    updatedCart.push({ ...product, quantity: 1 });
+  }
+
   setCart(updatedCart);
   localStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
+};
 
   return (
     <div>
