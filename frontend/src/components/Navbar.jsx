@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ cartCount }) => {
   const navigate = useNavigate();
 
   return (
@@ -13,6 +13,14 @@ const Navbar = () => {
       <div>
         <button onClick={() => navigate("/products")} style={styles.btn}>
           Products
+        </button>
+
+        <button onClick={() => navigate("/cart")}>
+          Cart ({cartCount || 0})
+        </button>
+
+        <button onClick={() => console.log("clicked")}>
+          Test Click
         </button>
 
         <button onClick={() => navigate("/")} style={styles.btn}>
@@ -30,6 +38,9 @@ const styles = {
     padding: "15px",
     background: "black",
     color: "white",
+    position: "sticky",   
+    top: 0,
+    zIndex: 1000,
   },
   btn: {
     marginLeft: "10px",
